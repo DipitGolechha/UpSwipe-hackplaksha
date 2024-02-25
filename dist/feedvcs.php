@@ -5,16 +5,36 @@ if ($_SESSION["loggedin"] !== true) {
     header("Location: index.php");
     exit;
 }
-$userId = $_SESSION["id"];
 
+try {
+    $pdo = new PDO('sqlite:upswipe.db');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if($_SESSION["accountType"] == "startup"){
-  header("Location: feedstartup.php");
-  exit;
+    // Assuming $investor_id_current is dynamically set somewhere in your session or application.
+    $investor_id_current = 5; // Example value
+
+    $stmt = $pdo->prepare("SELECT ii.*, l.name FROM startups_information ii INNER JOIN login l ON ii.startup_id = l.id WHERE ii.startup_id = :investorIdCurrent");
+    $stmt->bindParam(':investorIdCurrent', $investor_id_current, PDO::PARAM_INT);
+    $stmt->execute();
+    $newContent = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($newContent) {
+        $profileImagePath = $newContent['logo'];
+        $basePath = '/home/dipit/Dipit/UpSwipe/dist/'; // Base directory path to be removed
+        $relativePath = str_replace($basePath, '', $profileImagePath);
+        $relativePath = ltrim($relativePath, '/');
+    } else {
+        echo "No content found.";
+        exit;
+    }
+    
+} catch (PDOException $e) {
+    die("Error: " . $e->getMessage());
 }
 ?>
 
-!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -22,9 +42,7 @@ if($_SESSION["accountType"] == "startup"){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>feeds vcs </title>
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<style>
+  <style>
   
     body {
              font-family:sans-serif;
@@ -76,127 +94,83 @@ if($_SESSION["accountType"] == "startup"){
          transform: translateY(0); /* Instantly reset position */
      }
  </style>
- 
+</head>
 
 <body class="bg-[#110B11] min-h-screen pt-8 pb-16 px-4">
-    <div class="relative">
-      
-      <div class="absolute right-4 top-4 text-white flex items-center">
-      
-       
-      </div>
-    </div>
-    <div class="max-w-2xl mx-auto  bg-[#110B11]
-
-    rounded-xl overflow-hidden shadow-lg wrapper">
-
+   <div class='max-w-2xl mx-auto  bg-[#110B11] rounded-xl overflow-hidden shadow-lg wrapper'>.
     <div class="max-w-2xl mx-auto bg-[#110B11] rounded-xl overflow-hidden shadow-lg">
         <div class="p-0 items-center">
             <div class="bg-gradient-to-r from-[#667EEA] to-[#764BA2] text-white p-2 rounded-md mb-4 shadow w-auto max-w-xs mx-auto">
                 <h2 class="font-semibold text-center">FINANCIAL TECHNOLOGY</h2>
             </div>
+            <!-- Location -->
             <div class="bg-gradient-to-r from-[#667EEA] to-[#764BA2] text-white p-2 rounded-md mb-6 shadow w-auto max-w-xs mx-auto">
                 <p class="text-center">CHANDIGARH, INDIA</p>
             </div>
-
-        </div>
-        <!-- Image Placeholder -->
-        <div class="flex justify-center items-center mt-4">
-            <div class="w-40 h-24 bg-gray-300 rounded-lg overflow-hidden">
-                <img src="data:image/png;base64,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" class="w-full h-full object-cover" alt="Company Logo">
-            </div>
-        </div>
-        
-        </div>
-
-<center> 
-        <h1 class="font-bold pb-2 transform">
-      <span class="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
-        Up Swipe
-      </span><br>
-      <span class="text-transparent text-2xl bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
-        All about us
-      </span>
-    </h1>
-    </center>
-              
-      <article class="hover:animate-background rounded-xl p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border-8" >
-        <div class="rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900">
-            <time datetime="2022-10-10" class="block text-lg text-gray-500 dark:text-gray-400">
-                Vision
-            </time>
-            <a href="#">
-                <h3 class="mt-0.5 text-base font-medium text-gray-900 dark:text-white">
-                    Visibility to make trade-offs between cost, latency, and quality. 
-                </h3>
-            </a>
-    
-            <div class="mt-3 flex flex-wrap gap-1">
-                
-            </div>
-        </div>
-    </article>
-    
-      
-
-      <br>
-
-      <article class="hover:animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border-8" style="border-color: #110B11;">
-      <div class="rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900">
-            <time datetime="2022-10-10" class="block text-lg text-white dark:text-gray-400">
-                Unique Selling Point (USP)
-            </time>
-            <a href="#">
-                <h3 class="mt-0.5 text-base font-medium text-gray-900 dark:text-white">
-                    Developer productivity.
-                </h3>
-            </a>
-    
-            <div class="mt-3 flex flex-wrap gap-1">
-                
-            </div>
-        </div>
-    </article>
-    
-
-      <br>
-
-      <article class="hover:animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border-8" style="border-color: #110B11;">
-        <div class="rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900">
-            <time datetime="2022-10-10" class="block text-lg text-gray-500 dark:text-gray-400">
-                Motivation
-            </time>
-            <a href="#">
-                <h3 class="mt-0.5 text-base font-medium text-gray-900 dark:text-white">
-                    Changing the world of investments.
-                </h3>
-            </a>
-    
-            <div class="mt-3 flex flex-wrap gap-1">
-                
-            </div>
-        </div>
-    </article>
-    
-<br>
-<article class="hover:animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border-8" style="border-color: #110B11;">
-    <div class="rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900">
-        <time datetime="2022-10-10" class="block text-lg text-gray-500 dark:text-gray-400">
-            Target Market
-        </time>
-        <a href="#">
-            <h3 class="mt-0.5 text-base font-medium text-gray-900 dark:text-white">
-               Students aiming to secure an investment.
-            </h3>
-        </a>
-
-        <div class="mt-3 flex flex-wrap gap-1">
-            
-        </div>
-    </div>
-</article>
-      
-<section style="background-color: #110B11;">
+                <div class='flex justify-center items-center mt-4'>
+                    <div class='w-44 h-26 bg-gray-300 rounded-lg overflow-hidden'>
+                        <img src='<?php echo $relativePath; ?>' class='w-full h-full object-cover' alt='Company Logo'>
+                    </div>
+                </div>
+                <center>
+                    <h2 class='text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll text-6xl font-semibold pt-2'>
+                    <?= htmlspecialchars($newContent['startup_name']) ?>
+                    </h2>
+                </center>
+                <div class='max-w-4xl mx-auto text-center pt-4'>
+                    <h2 class='text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll text-2xl font-semibold pt-2'>
+                      All About Us
+                    </h2>
+                </div>
+                <br>
+                <article class='hover:animate-background rounded-xl bg-gradient-to-r from-[#110B11] to-[#110B11] p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border' style='border-color: #667EEA;'>
+                    <div class='rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900'>
+                        <time datetime='2022-10-10' class='block text-3xl text-gray-500 dark:text-gray-400'>
+                            Vision
+                        </time>
+                        <a href='#'>
+                            <h3 class='mt-0.5 text-base font-medium text-gray-900 dark:text-white'>
+                            <?= htmlspecialchars($newContent['vision']) ?>                            </h3>
+                        </a>
+                    </div>
+                </article>
+                <br>
+                <article class='hover:animate-background rounded-xl bg-gradient-to-r from-[#110B11] to-[#110B11] p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border' style='border-color: #667EEA;'>
+                    <div class='rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900'>
+                        <time datetime='2022-10-10' class='block text-3xl text-gray-500 dark:text-gray-400'>
+                            Unique Selling Point (USP)
+                        </time>
+                        <a href='#'>
+                            <h3 class='mt-0.5 text-base font-medium text-gray-900 dark:text-white'>
+                            <?= htmlspecialchars($newContent['usp']) ?>                            </h3>
+                        </a>
+                    </div>
+                </article>
+                <br>
+                <article class='hover:animate-background rounded-xl bg-gradient-to-r from-[#110B11] to-[#110B11] p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border' style='border-color: #667EEA;'>
+                    <div class='rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900'>
+                        <time datetime='2022-10-10' class='block text-3xl text-gray-500 dark:text-gray-400'>
+                            Motivation
+                        </time>
+                        <a href='#'>
+                            <h3 class='mt-0.5 text-base font-medium text-gray-900 dark:text-white'>
+                            <?= htmlspecialchars($newContent['motivation']) ?>                            </h3>
+                        </a>
+                    </div>
+                </article>
+                <br>
+                <article class='hover:animate-background rounded-xl bg-gradient-to-r from-[#110B11] to-[#110B11] p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border' style='border-color: #667EEA;'>
+                    <div class='rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900'>
+                        <time datetime='2022-10-10' class='block text-3xl text-gray-500 dark:text-gray-400'>
+                            Target Market
+                        </time>
+                        <a href='#'>
+                            <h3 class='mt-0.5 text-base font-medium text-gray-900 dark:text-white'>
+                            <?= htmlspecialchars($newContent['target_market']) ?>                            </h3>
+                        </a>
+                    </div>
+                </article>
+                section style="background-color: #110B11;">
     <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-2 lg:px-8">
       
   
@@ -211,20 +185,20 @@ if($_SESSION["accountType"] == "startup"){
     </h1>
     <h1 class="text-2xl font-bold pb-2 transform">
     <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
-          Founding Year
-      </span> 
+Founding Year      </span> 
     </h1>
           </div>
   
           <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center">
           <h1 class="text-5xl font-bold pb-2 transform">
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
-        1M+
+        10
       </span>
     </h1>
     <h1 class="text-2xl font-bold pb-2 transform">
     <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
-          Customers
+    Customers (100s)
+
       </span> 
     </h1>
           </div>
@@ -232,40 +206,29 @@ if($_SESSION["accountType"] == "startup"){
           <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
           <h1 class="text-5xl font-bold pb-2 transform">
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
-        50K+
+        50
       </span>
     </h1>
     <h1 class="text-2xl font-bold pb-2 transform">
     <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
-         Revenue
+    Revenue (Lakhs)
+
       </span> 
     </h1>
           </div>
         </dl>
       </div>
     </div>
+    
   </section>
-  
+            </div>
+        </div>
+<br><br>
 
-  
-
-
-
-      </div>
-      <br>
-      <ul role="list" class="divide-y divide-gray-100">
-       
-        
-
-        <br>
-        
-        
-        <div class="w-full max-w-2xl mx-auto p-4 flex items-center justify-between bg-[#110B11] rounded-lg shadow">
-          
-  
-          <div class="w-full max-w-2xl mx-auto p-4 flex items-center justify-between bg-gradient-to-r from-[#667EEA] to-[#764BA2] rounded-lg shadow">
+      
+        <div class="w-full max-w-2xl mx-auto p-4 flex items-center justify-between bg-gradient-to-r from-[#667EEA] to-[#764BA2] rounded-lg shadow">
             <!-- Cross (Cancel) Button on the Left -->
-            <button class="p-2 rounded-full bg-red-500 text-white"class="btn swipe-btn" id="reset">
+            <button class="p-2 rounded-full bg-red-500 text-white" class="btn swipe-btn" id="reset" >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -278,22 +241,6 @@ if($_SESSION["accountType"] == "startup"){
             </svg>
         </button>
     </div>
-        </div>
-    </div>
-    <script>
-        document.getElementById("run").addEventListener("click", function () {
-            var wrapper = document.querySelector('.wrapper');
-            wrapper.classList.add('swipe-up');
-            wrapper.classList.remove('swipe-down', 'swipe-reset'); // Ensure other classes are removed
-        });
-    
-        document.getElementById("reset").addEventListener("click", function () {
-            var wrapper = document.querySelector('.wrapper');
-            wrapper.classList.add('swipe-down');
-            wrapper.classList.remove('swipe-up', 'swipe-reset'); // Ensure other classes are removed
-        });
-    </script>
-
    <!-- Bottom Navigation Bar -->
    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 flex justify-around py-4">
     <!-- Home Icon -->
@@ -315,7 +262,20 @@ if($_SESSION["accountType"] == "startup"){
       </svg>
     </a>
   </nav>
+  
+  <script>
+        document.getElementById("run").addEventListener("click", function () {
+            var wrapper = document.querySelector('.wrapper');
+            wrapper.classList.add('swipe-up');
+            wrapper.classList.remove('swipe-down', 'swipe-reset'); // Ensure other classes are removed
+        });
     
+        document.getElementById("reset").addEventListener("click", function () {
+            var wrapper = document.querySelector('.wrapper');
+            wrapper.classList.add('swipe-down');
+            wrapper.classList.remove('swipe-up', 'swipe-reset'); // Ensure other classes are removed
+        });
+    </script>
    
 
 </body>

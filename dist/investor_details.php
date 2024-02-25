@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sinceyear = filter_input(INPUT_POST, 'sinceyear', FILTER_SANITIZE_STRING);
     $comp_invested = filter_input(INPUT_POST, 'comp_invested', FILTER_SANITIZE_STRING);
     $Revenuegen = filter_input(INPUT_POST, 'Revenuegen', FILTER_SANITIZE_STRING);
-
+    $field = filter_input(INPUT_POST, 'field', FILTER_SANITIZE_STRING);
     
     // Handle file upload
     $imagePath = '';
@@ -52,9 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Insert data into database
-        $sql = "INSERT INTO information_investor (investor_id, location, currentrole, yourstory, experience, education, expertise, image, Funding_stage_preference,industry_since,companies_invested,revenue_gen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO information_investor (investor_id, location, currentrole, yourstory, experience, education, expertise, image, Funding_stage_preference,industry_since,companies_invested,revenue_gen,field) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$investorId, $location, $currentRole, $yourStory, $yourExperience, $yourEducation, $yourExpertise, $imagePath, $fundingPref,$sinceyear,$comp_invested,$Revenuegen]);
+        $stmt->execute([$investorId, $location, $currentRole, $yourStory, $yourExperience, $yourEducation, $yourExpertise, $imagePath, $fundingPref,$sinceyear,$comp_invested,$Revenuegen,$field]);
         
         // Redirect after successful insertion
         header("Location: feedvcs.php");
@@ -161,6 +161,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 placeholder="Your current role"
                 style="color: white; border-color: #595959;"
             />
+        </div>
+        <div>
+            <label for="field" class="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Industry</label>
+<select 
+    name="field" 
+    id="field" 
+    class="flex h-10 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-1 w-full rounded-md border bg-gradient-to-r from-gray-500 to-gray-600 border-white text-white" 
+    style="color: white; border-color: #595959;"
+    required
+>
+    <option value="" selected disabled>Your industry</option>
+    <option value="Agriculture">Agriculture</option>
+    <option value="Manufacturing">Manufacturing</option>
+    <option value="InformationTechnology">Information Technology</option>
+    <option value="Pharmaceuticals">Pharmaceuticals</option>
+    <option value="Automobile">Automobile</option>
+    <option value="FinancialServices">Financial Services</option>
+    <option value="Infrastructure">Infrastructure</option>
+    <option value="TourismHospitality">Tourism & Hospitality</option>
+    <option value="EducationTraining">Education & Training</option>
+    <option value="RetailEcommerce">Retail & Ecommerce</option>
+    <option value="Anyother">Any Other</option>
+</select>
+
         </div>
         <div>
             <label class="text-sm font-medium text-white" for="your_story">

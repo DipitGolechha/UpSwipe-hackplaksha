@@ -84,7 +84,6 @@ if($_SESSION["accountType"] == "investor"){
 <div class="wrapper max-w-2xl mx-auto bg-[#110B11] rounded-xl overflow-hidden shadow-lg">
 
     <div class="relative">
-      <img class="w-full h-30 pb-10 " src="/images/logo.png" alt="Upswipe Background">
       <div class="absolute right-4 top-4 text-white flex items-center">
       
        
@@ -313,7 +312,6 @@ if($_SESSION["accountType"] == "investor"){
             <div class="wrapper max-w-2xl mx-auto bg-[#110B11] rounded-xl overflow-hidden shadow-lg">
 
 <div class="relative">
-  <img class="w-full h-30 pb-10 " src="/images/logo.png" alt="Upswipe Background">
   <div class="absolute right-4 top-4 text-white flex items-center">
   
    
@@ -335,7 +333,7 @@ rounded-xl overflow-hidden shadow-lg wrapper">
         <!-- Image Placeholder -->
         <div class="flex justify-center items-center mt-4">
             <div class="w-24 h-24 bg-gray-300 rounded-full overflow-hidden">
-                <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcSb5YTP_Zfb9Aj9h3n79iDjofIAWbIRCn2mbRxjP04h8I7nDF1tj5DP_oCVy4xqRAyd5fxaiA9eZGJ0W4I" class="w-full h-full object-cover" alt="Profile Picture">
+                <img src="/images/images.jpeg" class="w-full h-full object-cover" alt="Profile Picture">
             </div>
         </div>
         <!-- Name -->
@@ -434,74 +432,56 @@ rounded-xl overflow-hidden shadow-lg wrapper">
 <br>
 
 
-  
 <section style="background-color: #110B11;">
 <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-2 lg:px-8">
   
 
   <div class="mt-8 sm:mt-12">
     <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-      <div class="flex flex-col rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
-        <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-          In This Industry Since
-        </dt>
-
-        <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">2009</dd>
+      <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
+      
+        <h1 class="text-5xl font-bold pb-2 transform">
+  <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+    2019
+  </span>
+</h1>
+<h1 class="text-2xl font-bold pb-2 transform">
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+      In this industry since
+  </span> 
+</h1>
       </div>
 
-      <div class="flex flex-col rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
-        <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-         Companies Invested In
-        </dt>
-
-        <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">50+</dd>
+      <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center">
+      <h1 class="text-5xl font-bold pb-2 transform">
+  <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+    10+
+  </span>
+</h1>
+<h1 class="text-2xl font-bold pb-2 transform">
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+      Companies invested in
+  </span> 
+</h1>
       </div>
 
-      <div class="flex flex-col rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
-        <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-          Revenue Generated
-        </dt>
-
-        <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">50M+</dd>
+      <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
+      <h1 class="text-5xl font-bold pb-2 transform">
+  <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+    50M+
+  </span>
+</h1>
+<h1 class="text-2xl font-bold pb-2 transform">
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+     Revenue generated
+  </span> 
+</h1>
       </div>
     </dl>
   </div>
 </div>
+
 </section>
-
-
-
-
-  
-  <br>
-  <ul role="list" class="divide-y divide-gray-100">
-   
-    
-
-    <br>
-    
-    
-    <div class="w-full max-w-2xl mx-auto p-4 flex items-center justify-between bg-[#110B11] rounded-lg shadow">
-      
-
-      <div class="w-full max-w-2xl mx-auto p-4 flex items-center justify-between bg-gradient-to-r from-[#667EEA] to-[#764BA2] rounded-lg shadow">
-        <!-- Cross (Cancel) Button on the Left -->
-        <button class="p-2 rounded-full bg-red-500 text-white" class="btn swipe-btn" id="reset" >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-
-      <!-- Tick (Check) Button on the Right -->
-      <button class="p-2 rounded-full bg-green-500 text-white" class="btn swipe-btn" id="run">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-        </svg>
-    </button>
-</div>
-</div>
-</div>
-</div>
             `;
             document.querySelector('.wrapper').innerHTML = newCardContent;
             window.scrollTo(0, 0);
