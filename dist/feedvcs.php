@@ -1,4 +1,20 @@
-<!DOCTYPE html>
+<?php
+session_start();
+
+if ($_SESSION["loggedin"] !== true) {
+    header("Location: index.php");
+    exit;
+}
+$userId = $_SESSION["id"];
+
+
+if($_SESSION["accountType"] == "startup"){
+  header("Location: feedstartup.php");
+  exit;
+}
+?>
+
+!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -91,22 +107,20 @@
             </div>
         </div>
         
+        </div>
 
-
-            <center>
-                <h2 class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll text-4xl font-semibold pt-2">
-                  Upswipe
-                </h2> 
-              </center>       
+<center> 
+        <h1 class="font-bold pb-2 transform">
+      <span class="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+        Up Swipe
+      </span><br>
+      <span class="text-transparent text-2xl bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+        All about us
+      </span>
+    </h1>
+    </center>
               
-              <div class="max-w-4xl mx-auto text-center pt-4">
-                <!-- Title -->
-                <h2 class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll text-2xl font-semibold pt-2">
-                  All About Us
-                </h2>
-              </div>
-              
-      <article class="hover:animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border-8" style="border-color: #110B11;">
+      <article class="hover:animate-background rounded-xl p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border-8" >
         <div class="rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900">
             <time datetime="2022-10-10" class="block text-lg text-gray-500 dark:text-gray-400">
                 Vision
@@ -128,8 +142,8 @@
       <br>
 
       <article class="hover:animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] dark:shadow-gray-700/25 border-8" style="border-color: #110B11;">
-        <div class="rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900">
-            <time datetime="2022-10-10" class="block text-lg text-gray-500 dark:text-gray-400">
+      <div class="rounded-[10px] bg-white p-3 sm:p-4 dark:bg-gray-900">
+            <time datetime="2022-10-10" class="block text-lg text-white dark:text-gray-400">
                 Unique Selling Point (USP)
             </time>
             <a href="#">
@@ -188,33 +202,51 @@
   
       <div class="mt-8 sm:mt-12">
         <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div class="flex flex-col rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
-            <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-              Founding Year
-            </dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">2019</dd>
+          <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
+          
+            <h1 class="text-5xl font-bold pb-2 transform">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+        2019
+      </span>
+    </h1>
+    <h1 class="text-2xl font-bold pb-2 transform">
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+          Founding Year
+      </span> 
+    </h1>
           </div>
   
-          <div class="flex flex-col rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
-            <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-             Customers
-            </dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">1M+</dd>
+          <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center">
+          <h1 class="text-5xl font-bold pb-2 transform">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+        1M+
+      </span>
+    </h1>
+    <h1 class="text-2xl font-bold pb-2 transform">
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+          Customers
+      </span> 
+    </h1>
           </div>
   
-          <div class="flex flex-col rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
-            <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-              Revenue
-            </dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">50K+</dd>
+          <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
+          <h1 class="text-5xl font-bold pb-2 transform">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+        50K+
+      </span>
+    </h1>
+    <h1 class="text-2xl font-bold pb-2 transform">
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+         Revenue
+      </span> 
+    </h1>
           </div>
         </dl>
       </div>
     </div>
   </section>
+  
+
   
 
 

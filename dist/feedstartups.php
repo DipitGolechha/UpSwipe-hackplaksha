@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+if ($_SESSION["loggedin"] !== true) {
+    header("Location: index.php");
+    exit;
+}
+$userId = $_SESSION["id"];
+
+if($_SESSION["accountType"] == "investor"){
+    #header("Location: feedvcs.php");
+   # exit;
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -188,45 +205,57 @@
 <br>
 
 
-      
 <section style="background-color: #110B11;">
     <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-2 lg:px-8">
       
   
       <div class="mt-8 sm:mt-12">
         <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div class="flex flex-col rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
-            <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-              In This Industry Since
-            </dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">2009</dd>
+          <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
+          
+            <h1 class="text-5xl font-bold pb-2 transform">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+        2019
+      </span>
+    </h1>
+    <h1 class="text-2xl font-bold pb-2 transform">
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+          In this industry since
+      </span> 
+    </h1>
           </div>
   
-          <div class="flex flex-col rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
-            <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-             Companies Invested In
-            </dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">50+</dd>
+          <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center">
+          <h1 class="text-5xl font-bold pb-2 transform">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+        10+
+      </span>
+    </h1>
+    <h1 class="text-2xl font-bold pb-2 transform">
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+          Companies invested in
+      </span> 
+    </h1>
           </div>
   
-          <div class="flex flex-col rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
-            <dt class="order-last text-lg font-medium text-gray-500 dark:text-white/75">
-              Revenue Generated
-            </dt>
-  
-            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl dark:text-blue-50">50M+</dd>
+          <div class="flex flex-col rounded-lg bg-black px-4 py-8 text-center dark:from-gray-700 dark:to-gray-800">
+          <h1 class="text-5xl font-bold pb-2 transform">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#667EEA] to-[#764BA2] animate-pulse-scroll">
+        50M+
+      </span>
+    </h1>
+    <h1 class="text-2xl font-bold pb-2 transform">
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#4F4F4F] to-[#CACACA] animate-pulse-scroll">
+         Revenue generated
+      </span> 
+    </h1>
           </div>
         </dl>
       </div>
     </div>
+    
   </section>
-  
 
-
-
-      
       <br>
       <ul role="list" class="divide-y divide-gray-100">
        
