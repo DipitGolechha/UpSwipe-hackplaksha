@@ -5,3 +5,9 @@ AND NOT EXISTS (
     FROM information_investor
     WHERE information_investor.investor_id = login.id
 );
+
+
+
+
+
+

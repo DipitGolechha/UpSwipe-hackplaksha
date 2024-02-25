@@ -481,21 +481,21 @@ rounded-xl overflow-hidden shadow-lg wrapper">
     </script>
 
    <!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 left-0 right-0 bg-gray-900 flex justify-around py-4">
+   <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 flex justify-around py-4">
     <!-- Home Icon -->
-    <a href="#" class="text-white">
+    <a href="chats.php" class="text-white">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M10 2a1 1 0 0 1 .755.344l7.5 9a1 1 0 1 1-1.51 1.312L10 4.796 3.755 12.656a1 1 0 1 1-1.51-1.312l7.5-9A1 1 0 0 1 10 2zM5.293 13.707a1 1 0 0 1 0-1.414A1 1 0 0 1 6.707 13.707L10 17l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z" clip-rule="evenodd" />
       </svg>
     </a>
     <!-- Chat Icon -->
-    <a href="#" class="text-white">
+    <a href="feedstartups.php" class="text-white">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
         <path d="M3 6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6zm2-2v2h10V4H5zm1 4v2h8V8H6zm0 3v2h8v-2H6z" />
       </svg>
     </a>
     <!-- Profile Icon -->
-    <a href="#" class="text-white">
+    <a href="index.php" class="text-white">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
         <path d="M10 2a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 18v-2a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h1z" />
       </svg>
