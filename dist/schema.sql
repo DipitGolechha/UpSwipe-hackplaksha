@@ -86,26 +86,6 @@ CREATE TABLE people_team_startups (
   person_image_path TEXT,
   FOREIGN KEY (startup_id) REFERENCES "old_startups_info"(startup_id)
 );
-CREATE TABLE IF NOT EXISTS "old_startups_info" (
-  startup_id INTEGER PRIMARY KEY,
-  startup_name TEXT,
-  industry TEXT,
-  location TEXT,
-  vision TEXT,
-  usp TEXT,
-  motivation TEXT,
-  target_market TEXT,
-  customer_num INTEGER,
-  revenue_till_date INTEGER,
-  Team_size INTEGER,
-  Founding_year INTEGER,
-  logo TEXT, -- Now a TEXT type
-  Funding_stage TEXT,
-  Customer_acc_cost INTEGER,
-  Retention_rate_perc INTEGER,
-  User_growth_perc INTEGER,
-  FOREIGN KEY (startup_id) REFERENCES login(id)
-);
 CREATE TABLE startups_information (
 startup_id INTEGER PRIMARY KEY,
 startup_name TEXT,
