@@ -266,6 +266,8 @@ Founding Year      </span>
   <script>
         document.getElementById("run").addEventListener("click", function () {
             var wrapper = document.querySelector('.wrapper');
+            window.location.href = 'match.php';
+
             wrapper.classList.add('swipe-up');
             wrapper.classList.remove('swipe-down', 'swipe-reset'); // Ensure other classes are removed
         });
